@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Demo</title>
+        <link href="jquery.drop.upload.css" rel="stylesheet">
+
+    </head>
+
+    <body>
+        <div id="dropArea"></div>
+
+        <script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+        <script type="text/javascript" src="jquery.drop.upload.js"></script>
+        <script>
+            $('#dropArea').dropUpload({
+                text: '将视频/图片拖拽到此区域',
+                url: 'demo.json', // URL of server-side upload handler
+                name: 'file', // Parameter name of the uploaded file
+                responseType: 'json',
+                allowTypes: ['image', 'video', 'audio'],
+                callback: function(response){
+                    if (!response) {
+                        alert(filename + ' 上传失败');
+                        return false;
+                    }
+                    //alert(filename + ' 上传成功');
+
+                    console.log(response.text);
+                    $('#dropArea').after(response.text);
+                }
+            });
+        </script>
+    </body>
+</html>
